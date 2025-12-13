@@ -8,7 +8,9 @@ F-Encry inspired by Money Heist, Mr. Robots, and Women Entropy.
 ## Installation
 ```
 git clone https://github.com/rhpz/F-Encry.git
+cd F-Encry
 chmod +x f-encry
+./f-encry
 ```
 
 ```
