@@ -1,0 +1,79 @@
+#!/bin/bash
+
+# Default values
+algo="sha512sum"
+iters=""
+value=""
+
+# Show help if no args OR -h
+[ $# -eq 0 ] || [ "$1" = "-h" ] && {
+	echo ""
+	echo ""
+	echo "   _____     _____                 "
+	echo "  |   __|___|   __|___ ___ ___ _ _ "
+	echo "  |   __|___|   __|   |  _|  _| | |"
+	echo "  |___\\ v0.1|_____|_|_|___|__\\\_  |"
+	echo "                        /_________|"
+	echo "  infosec@zphr.xyz"
+	echo "  [Iteration Hash based Encryption]"
+	echo ""
+	echo ""
+	echo "USAGE:"
+	echo "  $0 -i <iterations> -c <value> [-a algorithm]"
+	echo ""
+	echo "REQUIRED OPTIONS:"
+	echo "  -i <iterations>    Number of hash iterations to perform"
+	echo "  -c <value>         Initial value / content to hash"
+	echo ""
+	echo "OPTIONAL OPTIONS:"
+	echo "  -a <algorithm>     Hash program to use (default: sha512sum)"
+	echo "                     Examples:"
+	echo "                     - md5sum"
+	echo "                     - sha1sum"
+	echo "                     - sha256sum"
+	echo "                     - sha512sum"
+	echo ""
+	echo "  -h                 Show this help message and exit"
+	echo ""
+	echo "OUTPUT FILES:"
+	echo "  key.txt             Final (highest sorted) hash"
+	echo "  keys.txt            All generated hashes"
+	echo ""
+	echo "EXAMPLES:"
+	echo "  $0 -i 5 -c hello"
+	echo "  $0 -i 10 -c secret -a sha256sum"
+	echo "  $0 -i 3 -c test -a md5sum"
+	echo ""
+	exit 0
+}
+
+# Simple flag handling
+while [ $# -gt 0 ]; do
+	case "$1" in
+		-i) iters="$2"; shift 2 ;;
+		-c) value="$2"; shift 2 ;;
+		-a) algo="$2"; shift 2 ;;
+		*) echo "Unknown option: $1"; exit 1 ;;
+	esac
+done
+
+# Check required arguments
+if [ -z "$iters" ] || [ -z "$value" ]; then
+	echo "Error: iterations (-i) and value (-c) are required."
+	exit 1
+fi
+
+key="key.txt"
+keys="keys.txt"
+
+echo ""
+
+for ((i=1; i<=iters; i++)); do
+	value=$(printf "%s\n" "$value" | ${algo} | awk '{print $1}')
+	echo "$value"
+done | tee "$keys" | sort -r | head -n 1 | tee "$key"
+
+echo ""
+echo "LAST key  	: $PWD/$key"
+echo "WHOLE keys	: $PWD/$keys"
+echo ""
