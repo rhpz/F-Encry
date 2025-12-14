@@ -1,9 +1,9 @@
 # F-Encry
-Yet another Iteration Hash based Encryption Algorithm writen in Bash (shell).
+Yet another Iteration Hash based Encryption Algorithm written in Bash (shell).
 
 F-Encry is a simple Iteration symetrics Hash based Encryption algorithm, where is the Decryption key are using Encrypted value itself. These Keys are not part of seclists or other gigantic wordlist, its generate by value itself.
 
-F-Encry inspired by Money Heist, Mr. Robots, and Women Entropy.
+
 
 ## Installation
 ```
@@ -53,3 +53,5 @@ EXAMPLES:
 
 ```
 ###
+
+F-Encry inspired by Money Heist, Mr. Robots, and Women Entropy.
