@@ -21,7 +21,7 @@ chmod +x f-encry
   |   __|___|   __|   |  _|  _| | |
   |___\ v0.1|_____|_|_|___|__\\_  |
                         /_________|
-  infosec@zphr.xyz
+  infosec [at] zphr.xyz
   [Iteration Hash based Encryption]
 
 
